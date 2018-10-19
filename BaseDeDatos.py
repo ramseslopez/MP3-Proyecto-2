@@ -6,7 +6,7 @@ class DataBase():
         self.database = sqlite3.connect("rolas.db")
         self.cursor = self.database.cursor()
         self.create_types_table()
-        self.insert()
+       # self.insert()
         self.create_performers_table()
         self.create_persons_table()
         self.create_groups_table()
@@ -140,7 +140,3 @@ class DataBase():
         ]
         for in_group in in_groups:
             self.database.execute(in_group)
-
-
-
-bs = DataBase()

@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 import eyed3
-
+import BaseDeDatos
 
 class Minero():
 
@@ -35,16 +35,26 @@ class Minero():
         return self.lista_artistas
 
     def tag_album(self,path):
+        db = BaseDeDatos.DataBase()
         lista = self.busca_mp3()
         for i in lista:
             mp3 = eyed3.load(path + "/" + i)
+            a = "INSERT INTO albums(id_album) VALUES (2,'2', 'mp3.tag.album', 'mp3.tag.release_date')"
+            db.cursor.execute(a)
+           # db.commit()
             self.lista_albums.append(mp3.tag.album)
-        return self.lista_albums
+        #return self.lista_albums
+
+    def agreagaDatos(self):
+        db = BaseDeDatos.DataBase()
+        
+
 
             
 ruta = str(Path.home().resolve()) + "/Música"
 s = Minero(ruta)
-print(s.tag_cancion(ruta))
-print(s.tag_artista(ruta))
-print(s.tag_album(ruta))
+#print(s.tag_cancion(ruta))
+
+#print(s.tag_artista(ruta))
+s.tag_album(ruta)
 
